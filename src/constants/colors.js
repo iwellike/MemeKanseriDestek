@@ -1,0 +1,56 @@
+export const LIGHT_COLORS = {
+  primary: '#4ECDC4',
+  primaryDark: '#3ABDB5',
+  secondary: '#FF6B9D',
+  purple: '#9B59B6',
+  orange: '#E67E22',
+  blue: '#3498DB',
+  pink: '#E91E8C',
+  green: '#27AE60',
+  darkGray: '#333333',
+  gray: '#888888',
+  lightGray: '#F5F5F5',
+  border: '#E0E0E0',
+  white: '#FFFFFF',
+  black: '#000000',
+  danger: '#E74C3C',
+  success: '#27AE60',
+  headerBg: '#4ECDC4',
+  headerText: '#FFFFFF',
+  background: '#FFFFFF',
+  cardBg: '#F5F5F5',
+  textPrimary: '#333333',
+  textSecondary: '#888888',
+};
+
+export const DARK_COLORS = {
+  primary: '#4ECDC4',
+  primaryDark: '#3ABDB5',
+  secondary: '#FF6B9D',
+  purple: '#9B59B6',
+  orange: '#E67E22',
+  blue: '#3498DB',
+  pink: '#E91E8C',
+  green: '#27AE60',
+  darkGray: '#EEEEEE',
+  gray: '#AAAAAA',
+  lightGray: '#2A2A2A',
+  border: '#444444',
+  white: '#1E1E1E',
+  black: '#FFFFFF',
+  danger: '#E74C3C',
+  success: '#27AE60',
+  headerBg: '#1E1E1E',
+  headerText: '#FFFFFF',
+  background: '#121212',
+  cardBg: '#2A2A2A',
+  textPrimary: '#EEEEEE',
+  textSecondary: '#AAAAAA',
+};
+
+export const COLORS = LIGHT_COLORS;
+
+export const FONTS = {
+  regular: 'System',
+  bold: 'System',
+};

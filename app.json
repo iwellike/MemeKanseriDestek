@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "Meme Kanseri Destek",
+    "slug": "meme-kanseri-destek",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#4ECDC4"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.example.memekanseridestek"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#4ECDC4"
+      },
+      "package": "com.example.memekanseridestek"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}

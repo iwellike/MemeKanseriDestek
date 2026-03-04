@@ -1,0 +1,181 @@
+import React, { useState } from 'react';
+import {
+  View, Text, TextInput, TouchableOpacity,
+  StyleSheet, KeyboardAvoidingView, Platform,
+  ActivityIndicator, Alert,
+} from 'react-native';
+import { COLORS } from '../constants/colors';
+import { useAuth } from '../context/AuthContext';
+
+export default function LoginScreen({ navigation }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const { login, loading } = useAuth();
+
+  const handleLogin = async () => {
+    if (!email || !password) {
+      Alert.alert('Hata', 'Lütfen e-posta ve parolayı doldurun.');
+      return;
+    }
+    const result = await login(email, password);
+    if (!result.success) {
+      Alert.alert('Hata', result.message || 'Giriş başarısız.');
+    }
+  };
+
+  return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}
+    >
+      {/* Header */}
+      <View style={styles.header}>
+        <Text style={styles.appName}>Meme Kanseri</Text>
+        <Text style={styles.title}>Giriş</Text>
+        <Text style={styles.subtitle}>Yap</Text>
+      </View>
+
+      {/* Form */}
+      <View style={styles.form}>
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputLabel}>Email</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="E-posta adresiniz"
+            value={email}
+            onChangeText={setEmail}
+            keyboardType="email-address"
+            autoCapitalize="none"
+          />
+        </View>
+
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputLabel}>Parola</Text>
+          <View style={styles.passwordRow}>
+            <TextInput
+              style={[styles.input, { flex: 1 }]}
+              placeholder="Parolanız"
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry={!showPassword}
+            />
+            <TouchableOpacity
+              onPress={() => setShowPassword(!showPassword)}
+              style={styles.eyeIcon}
+            >
+              <Text style={{ fontSize: 18 }}>{showPassword ? '🙈' : '👁️'}</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        <TouchableOpacity
+          style={styles.loginButton}
+          onPress={handleLogin}
+          disabled={loading}
+        >
+          {loading ? (
+            <ActivityIndicator color={COLORS.white} />
+          ) : (
+            <Text style={styles.loginButtonText}>Giriş Yap</Text>
+          )}
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.registerButton}
+          onPress={() => navigation.navigate('Register')}
+        >
+          <Text style={styles.registerButtonText}>Kayıt Ol</Text>
+        </TouchableOpacity>
+      </View>
+    </KeyboardAvoidingView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: COLORS.white,
+  },
+  header: {
+    backgroundColor: COLORS.primary,
+    paddingTop: 80,
+    paddingBottom: 40,
+    paddingHorizontal: 24,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+  },
+  appName: {
+    color: COLORS.white,
+    fontSize: 16,
+    opacity: 0.9,
+    marginBottom: 8,
+  },
+  title: {
+    color: COLORS.white,
+    fontSize: 42,
+    fontWeight: 'bold',
+  },
+  subtitle: {
+    color: COLORS.white,
+    fontSize: 22,
+    opacity: 0.9,
+  },
+  form: {
+    flex: 1,
+    padding: 24,
+    paddingTop: 40,
+  },
+  inputContainer: {
+    marginBottom: 20,
+  },
+  inputLabel: {
+    fontSize: 13,
+    color: COLORS.gray,
+    marginBottom: 6,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    borderRadius: 8,
+    padding: 12,
+    fontSize: 15,
+    backgroundColor: COLORS.white,
+  },
+  passwordRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    borderRadius: 8,
+    backgroundColor: COLORS.white,
+  },
+  eyeIcon: {
+    paddingHorizontal: 12,
+  },
+  loginButton: {
+    backgroundColor: COLORS.primary,
+    borderRadius: 10,
+    paddingVertical: 16,
+    alignItems: 'center',
+    marginTop: 10,
+    marginBottom: 12,
+  },
+  loginButtonText: {
+    color: COLORS.white,
+    fontSize: 17,
+    fontWeight: '600',
+  },
+  registerButton: {
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    borderRadius: 10,
+    paddingVertical: 14,
+    alignItems: 'center',
+    backgroundColor: COLORS.lightGray,
+  },
+  registerButtonText: {
+    color: COLORS.darkGray,
+    fontSize: 16,
+  },
+});
